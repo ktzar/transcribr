@@ -11,30 +11,5 @@ httpServer.use('/static', express.static('static'));
 /////////// END OF BORING STUFF //////////////
 
 httpServer.get('/', function (request, response) {
-    
-    requirejs(['static/football-table.js'], function(FootballTableComponent) {
-        
-        var output = '<link href="/static/styles.css" rel="stylesheet">';
-        
-        // Getting data
-        var footballTableData = {entries: ['Arsenal', 'Man Utd', 'Man City', 'Sunderland']};
-        
-        // Server side HTML rendering
-        output += '<div id="ft-2"></div><div id="ft-1">';
-        output += React.renderComponentToString(
-                      FootballTableComponent(footballTableData)
-                  );
-        output += '</div>';
-        
-        // Output the data in the HTML too
-        output += ('<script>window.dataUsedForServerRendering = ' + JSON.stringify(footballTableData) + ';</script>');
-        
-        // Client side initialisation <script>
-        output += '<script src="/static/require.js"></script>';
-        output += '<script src="/static/client.js"></script>';
-        
-        // Sending the server response
-        response.send(output);
-        
-    });
+    response.send("<script>document.location = 'static/index.html';</script>");
 });
