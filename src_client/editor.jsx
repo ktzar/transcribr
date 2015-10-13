@@ -2,8 +2,11 @@
 define(['react'], function(React) {
     return React.createClass({
         render: function () {
+            var boxStyle = {
+                height: '15em'
+            };
             return (
-                <div className="editor" contentEditable>Filepicker</div>
+                <div className="editor" style={boxStyle} contentEditable>Your text here...</div>
             );
         }
     });

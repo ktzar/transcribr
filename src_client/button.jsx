@@ -5,7 +5,7 @@ define(['react'], function(React) {
             var className = "btn",
                 shortcut = "", icon = "", label = "", title="";
             if (this.props.type) {
-                className += " " + this.props.type;
+                className += " btn-" + this.props.type;
             }
             if (this.props.shortcut) {
                 shortcut = "Ctrl + " + this.props.shortcut.slice(0,1);
@@ -20,7 +20,7 @@ define(['react'], function(React) {
                 label = this.props.label;
             }
             return (
-                <button className={className}title={title} onClick={this.props.onClick}>{icon}
+                <button disabled={this.props.disabled} className={className}title={title} onClick={this.props.onClick}>{icon}
                     {label}
                 </button>
             );
