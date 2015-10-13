@@ -8,7 +8,7 @@ module.exports = function (grunt) {
                         expand: true,
                         cwd: 'src_client',
                         src: '**/*.jsx',
-                        dest: 'static',
+                        dest: 'static/js',
                         ext: '.js'
                     }
                 

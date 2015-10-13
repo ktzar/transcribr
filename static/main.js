@@ -1,10 +1,10 @@
 requirejs.config({
     'paths': {
-        'react': './react'           
+        'react': './libs/react'           
     }
 });
 
-require(['react', './transcribr.js'], function (React, Transcribr) {
+require(['react', './js/transcribr.js'], function (React, Transcribr) {
     React.renderComponent(
         Transcribr(), document.getElementById('app')
     );
