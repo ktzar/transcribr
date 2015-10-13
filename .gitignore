@@ -1,5 +1,4 @@
-/static/football-table.js
-/static/table-row.js
+/static/js/*
 node_modules
 *.swp
 *.swo
