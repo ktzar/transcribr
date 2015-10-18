@@ -1,6 +1,6 @@
-#isomorphic-react
+# transcribrr
 
-## Running The Example
+## HTML5 transcribing software
 
 1. `cd` into the root of the project
 2. `npm install`
