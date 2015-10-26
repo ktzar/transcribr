@@ -11,3 +11,9 @@ h3 {
     padding: 16px 8px;
 }
 
+.filepicker .drop {
+    width: 400px;
+    height: 100px;
+    border: 2px dashed #444;
+}
+

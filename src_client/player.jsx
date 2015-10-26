@@ -9,25 +9,18 @@ define(['react', './button'], function(React, Button) {
             };
         },
         handleKey: function (e) {
-            if (e.altKey) {
-               switch (String.fromCharCode(e.keyCode)) {
-                   case 'P':
-                        if (this.refs.player.getDOMNode().paused) {
-                            this.play();
-                        } else {
-                            this.pause();
-                        }
-                        break;
-                   case 'S':
-                        this.stop();
-                        break;
-                   case 'U':
-                        this.minusFive();
-                        break;
-                   case 'I':
-                        this.plusFive();
-                        break;
-               }
+            if (e.keyCode === 9) {
+                e.preventDefault();
+                e.cancelBubble = true;
+                if (e.shiftKey) {
+                    this.minusFive();
+                } else {
+                    if (this.refs.player.getDOMNode().paused) {
+                        this.play();
+                    } else {
+                        this.pause();
+                    }
+                }
             }
         },
         secondsToTime: function (seconds) {
@@ -88,12 +81,13 @@ define(['react', './button'], function(React, Button) {
             }
         },
         slower: function () {
-            var newSpeed = parseFloat(this.state.speed - 0.05).toFixed(2);
+            var newSpeed = (parseFloat(this.state.speed) - 0.05).toFixed(2);
             this.setState({speed: newSpeed});
             this.adjustSpeed();
         },
         faster: function () {
-            var newSpeed = parseFloat(this.state.speed + 0.05).toFixed(2);
+            var newSpeed = (parseFloat(this.state.speed) + 0.05).toFixed(2);
+            console.log(newSpeed);
             this.setState({speed: newSpeed});
             this.adjustSpeed();
         },
@@ -107,17 +101,28 @@ define(['react', './button'], function(React, Button) {
             return (
                 <div className="player">
                     <audio ref="player" src={this.props.file}/>
-                    <Button disabled={this.isPlaying()} onClick={this.play} label="Play" icon="play" type="success" nolabel/>
-                    <Button disabled={!this.isPlaying()} onClick={this.pause} label="Pause" icon="pause" type="warning" nolabel/>
-                    <Button disabled={!this.isPlaying()} onClick={this.stop} label="Stop" icon="stop" type="danger" nolabel/>
-                    <Button onClick={this.slower} label="Slower" icon="minus-sign"/>
-                    <Button onClick={this.faster} label="Faster" icon="plus-sign"/>
-                    <Button onClick={this.minusFive} label="-5s" icon="fast-backward"/>
-                    <Button onClick={this.plusFive} label="+5s" icon="fast-forward"/>
+                    <div className="btn-group">
+                        <Button disabled={this.isPlaying()} onClick={this.play} label="Play" icon="play" type="success" nolabel/>
+                        <Button disabled={!this.isPlaying()} onClick={this.pause} label="Pause" icon="pause" type="warning" nolabel/>
+                        <Button disabled={!this.isPlaying()} onClick={this.stop} label="Stop" icon="stop" type="danger" nolabel/>
+                    </div>
+                    <br/>
+                    <div className="btn-group">
+                        <Button onClick={this.slower} label="Slower" icon="minus-sign"/>
+                        <Button onClick={this.faster} label="Faster" icon="plus-sign"/>
+                        <Button onClick={this.minusFive} label="-5s" icon="fast-backward"/>
+                        <Button onClick={this.plusFive} label="+5s" icon="fast-forward"/>
+                    </div>
+                    <br/>
                     <label className="player__speed badge badge-primary">{this.state.speed}x</label>
                     <label className={timeLabel}>
                         {currentTime} / {totalTime}
                     </label>
+                    <h4>Shortcuts</h4>
+                    <ul>
+                        <li>Tab: play / pause</li>
+                        <li>Shift + Tab: go back 5 seconds</li>
+                    </ul>
                 </div>
             );
         }

@@ -7,14 +7,23 @@ define(['react', './player', './filepicker', './editor'], function(React, Player
             };
         },
         newFile: function(filename) {
-            this.setStatus({file: filename});
+            console.log(filename);
+            this.setState({file: filename});
         },
         render: function () {
             return (
-                <div className='transcribr'>
-                    <Filepicker onNewfile={this.newFile} />
-                    <Editor>This is the editor</Editor>
-                    <Player file={this.state.file} />
+                <div className='transcribr container-fluid'>
+                    <div className='row'>
+                        <Filepicker onNewfile={this.newFile} />
+                    </div>
+                    <div className='row'>
+                        <div className='col-md-4'>
+                            <Player file={this.state.file} />
+                        </div>
+                        <div className='col-md-8'>
+                            <Editor>This is the editor</Editor>
+                        </div>
+                    </div>
                 </div>
             );
         }
