@@ -54,7 +54,6 @@ define(['react', './button'], function(React, Button) {
                 totalTime: Math.ceil(player.duration)
             });
         },
-        //TODO on mount add onprogress to player to show time
         stop: function () {
             this.pause();
             this.refs.player.getDOMNode().currentTime = 0;
@@ -87,7 +86,6 @@ define(['react', './button'], function(React, Button) {
         },
         faster: function () {
             var newSpeed = (parseFloat(this.state.speed) + 0.05).toFixed(2);
-            console.log(newSpeed);
             this.setState({speed: newSpeed});
             this.adjustSpeed();
         },
@@ -97,21 +95,30 @@ define(['react', './button'], function(React, Button) {
         render: function () {
             var currentTime = this.secondsToTime(this.state.currentTime),
                 totalTime = this.secondsToTime(this.state.totalTime),
-                timeLabel = "player__elapsed label label-" + (this.isPlaying() ? 'success' : 'warning');
+                timeLabel = "player__elapsed label label-" + (this.isPlaying() ? 'success' : 'warning'),
+                playing = <div className="label label-warning">No audio file loaded</div>;
+
+            if (this.props.data) {
+                var songName = this.props.name.match(/(.*)\.[a-zA-Z0-9]{3}$/)[1];
+                playing = <div className="label label-primary">Playing {songName}</div>
+            }
+
             return (
                 <div className="player">
-                    <audio ref="player" src={this.props.file}/>
+                    {playing}
+                    <audio ref="player" src={this.props.data}/>
+                    <br/>
                     <div className="btn-group">
-                        <Button disabled={this.isPlaying()} onClick={this.play} label="Play" icon="play" type="success" nolabel/>
+                        <Button disabled={!this.props.data || this.isPlaying()} onClick={this.play} label="Play" icon="play" type="success" nolabel/>
                         <Button disabled={!this.isPlaying()} onClick={this.pause} label="Pause" icon="pause" type="warning" nolabel/>
                         <Button disabled={!this.isPlaying()} onClick={this.stop} label="Stop" icon="stop" type="danger" nolabel/>
                     </div>
                     <br/>
                     <div className="btn-group">
-                        <Button onClick={this.slower} label="Slower" icon="minus-sign"/>
-                        <Button onClick={this.faster} label="Faster" icon="plus-sign"/>
-                        <Button onClick={this.minusFive} label="-5s" icon="fast-backward"/>
-                        <Button onClick={this.plusFive} label="+5s" icon="fast-forward"/>
+                        <Button type="xs" onClick={this.slower} label="Slower" icon="minus-sign"/>
+                        <Button type="xs" onClick={this.faster} label="Faster" icon="plus-sign"/>
+                        <Button type="xs" onClick={this.minusFive} label="-5s" icon="fast-backward"/>
+                        <Button type="xs" onClick={this.plusFive} label="+5s" icon="fast-forward"/>
                     </div>
                     <br/>
                     <label className="player__speed badge badge-primary">{this.state.speed}x</label>

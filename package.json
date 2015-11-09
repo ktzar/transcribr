@@ -1,11 +1,11 @@
 {
-  "name": "isomorphic-react",
+  "name": "transcribr",
   "version": "0.0.1",
   "description": "",
   "main": "server.js",
   "repository": "ajones513/isomorphic-react",
   "keywords": [],
-  "author": "Andrew Jones",
+  "author": "Miguel Gonzalez",
   "dependencies": {
     "express": "~4.6.1",
     "grunt-cli": "^0.1.13",

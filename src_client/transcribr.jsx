@@ -3,11 +3,15 @@ define(['react', './player', './filepicker', './editor', './nav'], function(Reac
     return React.createClass({
         getInitialState: function () {
             return {
-                file: false
+                file: false,
+                filename: ''
             };
         },
-        newFile: function(filename) {
-            this.setState({file: filename});
+        newFile: function(filedata, filename) {
+            this.setState({
+                filedata: filedata,
+                filename: filename
+            });
         },
         render: function () {
             return (
@@ -19,7 +23,7 @@ define(['react', './player', './filepicker', './editor', './nav'], function(Reac
                         </div>
                         <div className='row'>
                             <div className='col-md-4'>
-                                <Player file={this.state.file} />
+                                <Player name={this.state.filename} data={this.state.filedata} />
                             </div>
                             <div className='col-md-8'>
                                 <Editor>This is the editor</Editor>

@@ -35,10 +35,11 @@ define(['react'], function(React) {
                 });
             };
             reader.onload = function () {
-                that.props.onNewfile(reader.result);
+                that.props.onNewfile(reader.result, file.name);
                 that.setState({
                     status: file.name + ' loaded!'
                 });
+                $('#loadModal').modal('hide');
             };
             reader.readAsDataURL(file);
         },
