@@ -6,13 +6,52 @@ h3 {
     margin: 0;
 }
 
-.editor {
-    border: 2px solid #333;
-    padding: 16px 8px;
+.editor__title {
+    display: block;
+    border: 1px solid white;
+    background: #eee;
+    width: 100%;
+    padding: 8px;
+    font-size: 20px;
+}
+
+.editor__title:focus, .editor__title:hover, .editor__title:active {
+    border: 1px solid #999;
+}
+
+.editor__text {
+    display: block;
+    border: 1px solid white;
+    background: #eee;
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    height: 25em;
 }
 
 .filepicker .drop {
     padding: 16px;
     border: 2px dashed #444;
+}
+
+.documents {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    background: #ddd;
+    width: 250px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    padding: 8px;
+    transition: transform 250ms, opacity 100ms;
+    transform: translateX(0px);
+    opacity: 1;
+}
+
+.documents--closed {
+    transform: translateX(-264px);
+    opacity: 0;
 }
 
