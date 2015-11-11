@@ -1,6 +1,11 @@
 /** @jsx React.DOM */
 define(['react'], function(React) {
     return React.createClass({
+        _onDocumentsToggle: function () {
+            if (typeof this.props.onDocumentsToggle === 'function') {
+                this.props.onDocumentsToggle();
+            }
+        },
         render: function () {
             return (
                 <nav className="navbar navbar-default">
@@ -10,7 +15,7 @@ define(['react'], function(React) {
                         </div>
                         <ul className="nav navbar-nav navbar-right">
                             <li><a href="#" data-toggle="modal" data-target="#loadModal"><em className="glyphicon glyphicon-music"></em> Load audio</a></li>
-                            <li><a href="#"><em className="glyphicon glyphicon-floppy-disk"></em> Save text</a></li>
+                            <li><a href="#" onClick={this._onDocumentsToggle}><em className="glyphicon glyphicon-floppy-disk"></em> Documents</a></li>
                         </ul>
                     </div>
                 </nav>

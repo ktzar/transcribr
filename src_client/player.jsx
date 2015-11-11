@@ -63,8 +63,11 @@ define(['react', './button'], function(React, Button) {
             this.updateProgress();
         },
         minusFive: function () {
-            this.refs.player.getDOMNode().currentTime  -= 5;
-            this.updateProgress();
+            var node = this.refs.player.getDOMNode();
+            if (node.currentTime > 5) {
+                node.currentTime -= 5;
+                this.updateProgress();
+            }
         },
         pause: function () {
             this.refs.player.getDOMNode().pause();

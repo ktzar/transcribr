@@ -20,8 +20,7 @@ define(['react'], function(React) {
                 label = this.props.label;
             }
             return (
-                <button disabled={this.props.disabled} className={className}title={title} onClick={this.props.onClick}>{icon}
-                     {label}
+                <button disabled={this.props.disabled} className={className}title={title} onClick={this.props.onClick}>{icon} {label}
                 </button>
             );
         }
