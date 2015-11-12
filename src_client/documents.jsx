@@ -1,17 +1,18 @@
 /** @jsx React.DOM */
 define(['react', './document'], function(React, Document) {
+    var LS_KEY = 'transcribr-items';
     return React.createClass({
         _refreshData: function () {
             var data;
             try {
-                data = JSON.parse(window.localStorage.getItem('transcribr-items'));
+                data = JSON.parse(window.localStorage.getItem(LS_KEY));
             } catch (e) {
                 this._flashMessage("Can't load your stuff");
             }
-            if (data) {
-                this.setState({items: data.data});
+            if (data.hasOwnProperty('items')) {
+                this.setState({items: data.items});
             } else {
-                window.localStorage.setItem('transcribr-items', '{"data":[]}');
+                window.localStorage.setItem(LS_KEY, '{"items":[]}');
             }
         },
         _flashMessage: function (message, type) {
@@ -20,6 +21,20 @@ define(['react', './document'], function(React, Document) {
             setTimeout(function () {
                 that.setState({message: false});
             }, 1500);
+        },
+        _openDocument: function (name) {
+            console.log("Open document " + name);
+        },
+        _removeDocument: function (name) {
+            console.log("Remove document " + name);
+            var items = this.state.items;
+            items.forEach(function (item, index) {
+                if (item.name === name) {
+                    items.splice(index, 1);
+                }
+            });
+            this.setState({items: items});
+            window.localStorage.setItem(LS_KEY, JSON.stringify({items: items}));
         },
         getInitialState: function () {
             return {
@@ -30,9 +45,12 @@ define(['react', './document'], function(React, Document) {
             setInterval(this._refreshData, 100);
         },
         render: function () {
-            var containerClass = 'documents documents--' + (this.props.opened ? 'opened' : 'closed'),
+            var that = this,
+                containerClass = 'documents documents--' + (this.props.opened ? 'opened' : 'closed'),
                 documents = this.state.items.map(function (item) {
-                    return <Document name={item.name} />
+                    return <Document name={item.name}
+                        onOpen={that._openDocument}
+                        onRemove={that._removeDocument} />
                 }),
                 message = '';
 
