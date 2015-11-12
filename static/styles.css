@@ -44,7 +44,7 @@ h3 {
     background: #ddd;
     width: 250px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    padding: 8px;
+    padding: 8px 0;
     transition: transform 250ms, opacity 100ms;
     transform: translateX(0px);
     opacity: 1;
@@ -55,3 +55,12 @@ h3 {
     opacity: 0;
 }
 
+.documents h3 {
+    margin: 4px;
+}
+
+.document {
+    background: #eee;
+    padding: 2px 4px 2px 8px;
+    border-bottom: 1px dotted #ccc;
+}

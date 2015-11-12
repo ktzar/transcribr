@@ -1,11 +1,11 @@
 /** @jsx React.DOM */
-define(['react', './player', './filepicker', './editor', './documents', './nav'], function(React, Player, Filepicker, Editor, Documents, Nav) {
+define(['react', './player', './filepicker', './editor', './documents', './nav', './flashmessage'], function(React, Player, Filepicker, Editor, Documents, Nav, Flash) {
     return React.createClass({
         getInitialState: function () {
             return {
                 file: false,
                 filename: '',
-                documentsOpened: false,
+                documentsOpened: false
             };
         },
         onDocumentsToggle: function () {
